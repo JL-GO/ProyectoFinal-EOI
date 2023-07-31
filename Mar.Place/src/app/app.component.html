@@ -1,0 +1,42 @@
+<section *ngIf="!accesoPermitido" class="d-flex justify-content-center mt-5 pt-5">
+  <div class="card" style="width: 20rem;">
+    <div class="card-body">
+      <h5 class="card-title">Login usuario</h5>
+      <p class="card-text"></p>
+      <form [formGroup]="formAcceso">
+        <label class="me-2">Username</label><input formControlName="username">
+        <label class=" me-2 pe-1 mt-2">Password</label><input formControlName="password">
+        <button class="mt-2 btn btn-dark" (click)="autentificarse(formAcceso.value)" [disabled]="!formAcceso.valid">
+          Acceder </button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<section *ngIf="accesoPermitido">
+  <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand me-4 ms-3">MarketPlace JLGO</a>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav" *ngIf="recuentoTotal[0] != undefined ">
+          <a class="nav-link" [routerLink]="['usuarios']">Usuarios <b class="rojo"> {{recuentoTotal[0]}} </b></a>
+          <a class="nav-link" [routerLink]="['articulos']">Articulos <b class="rojo"> {{recuentoTotal[1]}} </b></a>
+          <a class="nav-link" [routerLink]="['pedidos']">Pedidos <b class="rojo"> {{recuentoTotal[2]}} </b></a>
+        </div>
+      </div>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+          <a class="nav-link">Usuario: <b class="rojo">{{nombreUsuario}}</b></a>
+          <button class="nav-link me-4" (click)="irMenuLogin()">Salir</button>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <!-- <div class="mt-4 justify-content-center d-flex" id="botonera">
+    <button class="btn btn-outline-dark me-3" [routerLink]="['usuarios']"><b>Usuarios</b></button>
+    <button class="btn btn-outline-dark me-3" [routerLink]="['articulos']"><b>Articulos</b></button>
+    <button class="btn btn-outline-dark me-3" [routerLink]="['pedidos']"><b>Pedidos</b></button>
+  </div> -->
+
+  <router-outlet></router-outlet>
+</section>

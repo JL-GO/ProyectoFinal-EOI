@@ -1,0 +1,14 @@
+<section class="mt-4 ms-5">
+    <div class="card" style="width: 20rem;">
+        <div class="card-body">
+            <form [formGroup]="form">
+                <label>Nombre usuario</label> <br>
+                <input type="text" formControlName="username"> <br>
+                <label class="mt-2">Contraseña</label> <br>
+                <input type="text" formControlName="password" class="pt-1">
+                <button class="btn btn-outline-success ms-2 mb-2 pt-1" [disabled]="!form.valid"
+                    (click)="peticionCrear(form.value)">Crear</button>
+            </form>
+        </div>
+    </div>
+</section>

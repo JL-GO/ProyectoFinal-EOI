@@ -1,0 +1,39 @@
+<label class="ms-4 mt-2">Buscar por nombre:</label>
+<input id="buscadorArticulos" class="form-control mr-sm-2 ms-3 mb-2" placeholder="artículo"
+    aria-label="Search" [(ngModel)]="busqueda" (keyup)="buscarPedidos()">
+
+<section class="row">
+    <div *ngFor="let art of articulos | async" class="col-3 mb-2 ms-3">
+        <div id="cardArticulos" class="card d-flex align-items-center">
+            <span *ngIf="seleccionModificar && idSeleccionado != art._id">
+            <img class="card-img-top mt-2" src="../../../../assets/articulos.png" alt="icono articulo" id="iconoArticulos">
+            </span>
+            <span *ngIf="!seleccionModificar">
+                <img class="card-img-top mt-2" src="../../../../assets/articulos.png" alt="icono articulo" id="iconoArticulos">
+                </span>
+            <div class="card-body">
+                <span *ngIf="idSeleccionado != art._id">
+                    <div class="d-flex justify-content-around">
+                        <h6 class="card-title text-center">{{art.nombre}}</h6>  
+                    </div>
+                    <p class="card-text ms-3" > Stock: {{art.stock}} <br>
+                        Precio: {{art.precio}} €<br>
+                        Comprado {{art.seleccionados}} veces <br> <br>
+                    </p>
+                    <div class="d-flex justify-content-around">
+                        <button class="btn btn-outline-info me-2" (click)="irActualizar(art._id!,art._rev!)"> Actualizar </button>
+                        <button class="btn btn-outline-danger" (click)="irBorrar(art._id!)"> Eliminar </button>
+                    </div>
+                </span>
+                <div *ngIf="idSeleccionado == art._id">
+                    <app-delete-articulos 
+                    *ngIf="seleccionBorrar" [idArticulo]='idSeleccionado' (finBorrar)="finModificacion($event)">
+                    </app-delete-articulos>
+                    <app-update-articulos 
+                    *ngIf="seleccionModificar" [articuloSeleccionado]='articuloSeleccionado' (finModificar)="finModificacion($event)">
+                </app-update-articulos>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

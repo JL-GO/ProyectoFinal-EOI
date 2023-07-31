@@ -1,0 +1,24 @@
+<span *ngFor="let art of articulos | async">
+    <div *ngIf="art._id == articuloSeleccionado._id">
+
+        <h6 class="card-title text-center">{{art.nombre}}</h6>
+        <p class="text-center mb-0 pb-1">Precio: {{art.precio}} € || Stock: {{art.stock}} </p>
+   
+        <div class="card-text mt-1 pt-1">
+            <form [formGroup]="form">
+                <label>Nombre artículo</label>
+                <input type="text" formControlName="nombre" class="form-control form-control-sm" placeholder={{art.nombre}}>
+                <label class="mt-1">Precio</label>
+                <input type="number" formControlName="precio" class="form-control form-control-sm" placeholder={{art.precio}}>
+                <label class="mt-1">Stock</label>
+                <input type="number" formControlName="stock" class="form-control form-control-sm" placeholder={{art.stock}}>
+                <div class="d-flex justify-content-around pt-2 mt-1">
+                    <button class="btn btn-outline-success me-2" (click)="peticionModificar(form.value)"
+                        [disabled]="!form.valid"> Guardar </button>
+                    <button class="btn btn-outline-secondary" (click)="volver(true)"> Cancelar </button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</span>

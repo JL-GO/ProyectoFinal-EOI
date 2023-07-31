@@ -1,0 +1,47 @@
+<label class="ms-4 mt-2">Buscar por nombre:</label>
+<input id="buscadorUsuarios" class="form-control mr-sm-2 ms-3 mb-2" placeholder="usuario" aria-label="Search"
+    [(ngModel)]="busqueda" (keyup)="buscarPedidos()">
+
+<section class="row">
+    <div *ngFor="let usuario of usuarios | async" class="col-3 mb-2 ms-3">
+        <div id="cardUsuario" class="card d-flex align-items-center">
+            <img class="card-img-top" src="../../../../assets/usuario.png" alt="icono usuario" id="iconoUsuario">
+            <div class="card-body">
+                <span *ngIf="idSeleccionado != usuario._id">
+                    <div class="d-flex justify-content-around">
+                        <h6 class="card-title">{{usuario.username}}</h6>
+                        <p *ngIf="totalPedidosPorUsuario.has(usuario._id!)">Pedidos:
+                            {{totalPedidosPorUsuario.get(usuario._id!)}} </p>
+                        <p *ngIf="!totalPedidosPorUsuario.has(usuario._id!)">Pedidos: 0</p>
+                    </div>
+                    <div id="top3">
+                        <span *ngIf="totalPedidosPorUsuario.has(usuario._id!)">
+                            <p class="card-text ms-3 mb-3"><b>Artículos top 3 pedidos: </b>
+                            <div *ngFor="let a of obtenerMasComprados(usuario._id!); let contador = index">
+                                <div *ngIf="contador < 3">
+                                   <i class="ps-4">- {{mapaConArticulos.get(a.id)}} {{a.cantidad}} ud</i> 
+                                </div>
+                            </div>
+                        </span>
+                        <span *ngIf="!totalPedidosPorUsuario.has(usuario._id!)">
+                            <p>Aún no ha comprado nada</p>
+                        </span>
+                    </div>
+                    <div class="d-flex justify-content-around">
+                        <button class="btn btn-outline-info" (click)="irActualizar(usuario._id!,usuario._rev!)">
+                            Actualizar </button>
+                        <button class="btn btn-outline-danger" (click)="irBorrar(usuario._id!)"> Eliminar </button>
+                    </div>
+                </span>
+                <div *ngIf="idSeleccionado == usuario._id">
+                    <app-delete-usuarios *ngIf="seleccionBorrar" [idUusario]='idSeleccionado'
+                        (finBorrar)="finModificacion($event)">
+                    </app-delete-usuarios>
+                    <app-update-usuarios *ngIf="seleccionModificar" [usuarioSeleccionado]='usuarioSeleccionado'
+                        (finModificar)="finModificacion($event)">
+                    </app-update-usuarios>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

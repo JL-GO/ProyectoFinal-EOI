@@ -1,0 +1,23 @@
+#iconoUsuario{
+    width: 100px;
+    text-align: center;
+}
+
+#cardUsuario{
+    width: 15rem; 
+
+    min-height: 22rem;
+    max-height: 20rem;
+}
+
+#buscadorUsuarios{
+    max-width: 82%;
+}
+
+section{
+    width: 161vh;
+}
+
+#top3{
+    min-height: 140px;
+}

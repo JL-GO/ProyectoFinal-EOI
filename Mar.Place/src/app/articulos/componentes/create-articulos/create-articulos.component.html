@@ -1,0 +1,16 @@
+<section class="mt-4 ms-5">
+    <div class="card" style="width: 20rem;">
+        <div class="card-body">
+            <form [formGroup]="form">
+                <label>Nombre articulo</label> <br>
+                <input type="text" formControlName="nombre" placeholder="Nombre"> <br>
+                <label class="mt-2">Precio</label> <br>
+                <input type="number" formControlName="precio" placeholder="Euros"> <br>
+                <label class="mt-2">Stock inicial</label> <br>
+                <input type="number" formControlName="stock" class="pt-1" placeholder="0">
+                <button class="btn btn-outline-success ms-2 mb-2 pt-1" [disabled]="!form.valid"
+                    (click)="peticionCrear(form.value)">Crear</button>
+            </form>
+        </div>
+    </div>
+</section>

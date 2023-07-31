@@ -1,0 +1,13 @@
+<span *ngFor="let usuario of usuarios | async">
+    <div *ngIf="usuario._id == idUusario">
+        <div class="d-flex justify-content-around">
+            <h6 class="card-title">{{usuario.username}}</h6>
+        </div>
+        <p class="card-text mb-5 pb-2 text-center"> ¿Seguro que quieres eliminar este usuario?</p> <br> <br>
+        <div class="d-flex justify-content-around">
+            <button class="btn btn-outline-danger" (click)="peticionBorrar(usuario._rev!)"> Eliminar </button>
+            <button class="btn btn-outline-secondary" (click)="volver(true)"> Cancelar
+            </button>
+        </div>
+    </div>
+</span>

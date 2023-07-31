@@ -1,0 +1,53 @@
+<span *ngIf="!seleccionModificar">
+    <label class="ms-2 mt-2">Buscar por nombre:</label>
+    <input id="buscadorPedidos" class="form-control   mb-2" placeholder="pedido" aria-label="Search"
+        [(ngModel)]="busqueda" (keyup)="buscarPedidos()">
+
+    <section class="row">
+        <div *ngFor="let pedido of pedidosConTotal" class="col-5 mb-2">
+            <div id="cardPedidos" class="card d-flex align-items-center" *ngIf="usuarios.has(pedido.usuario!)">
+
+                <img class="card-img-top mt-2" src="../../../../assets/pedidos.png" alt="icono articulo"
+                    id="iconoPedidos">
+
+                <div class="card-body ">
+                    <span *ngIf="idSeleccionado != pedido._id "
+                        class="d-flex flex-column align-items-center justify-content-between ms-2">
+
+                        <h6 class="card-title text-center me-2 ms-2">{{pedido.nombre}}</h6>
+
+                        <p class="card-text "> Fecha pedido: {{pedido.fecha | date:'dd-MM-yyyy'}} <br>
+                            Usuario: {{usuarios.get(pedido.usuario!)!.username}} <br>
+                            Total pedido: {{(pedido.precioTotal)!.toFixed(2)}} € <br>
+                            <b> </b>
+                        </p>
+
+                        <p class="card-text ps-0"></p>
+                        <div class="" id="listaArticulos">
+
+                            <div *ngFor="let item of pedido.articulos" id="articulo">
+                                <span *ngIf="articulos.has(item.id!)">
+                                • {{articulos.get(item.id!)!.nombre}} x {{item.cantidad}}Ud
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-around mt-4 align-items-end">
+                            <button class="btn btn-outline-info me-3" (click)="irActualizar(pedido._id!,pedido._rev!,usuarios.get(pedido.usuario!)!.username!, usuarios.get(pedido.usuario!)!._id!)">
+                                Actualizar </button>
+                            <button class="btn btn-outline-danger" (click)="irBorrar(pedido._id!)"> Eliminar </button>
+                        </div>
+
+                    </span>
+                    <div *ngIf="idSeleccionado == pedido._id">
+                        <app-delete-pedidos *ngIf="seleccionBorrar" [idPedido]='idSeleccionado'
+                            (finBorrar)="finModificacion($event)">
+                        </app-delete-pedidos>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</span>
+<app-update-pedidos *ngIf="seleccionModificar" [pedidoModificar]='pedidoSeleccionado' (finModificar)="finModificacion($event)">
+</app-update-pedidos>

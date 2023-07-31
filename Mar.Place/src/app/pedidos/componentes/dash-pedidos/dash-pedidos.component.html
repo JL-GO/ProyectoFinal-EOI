@@ -1,0 +1,12 @@
+<section class="container-fluid d-flex">
+    <div class="mt-2 p-5">
+        <button class="btn btn-light mb-2 pe-2" (click)="irCrear()">Crear Pedido</button> <br>
+        <button class="btn btn-light pe-4 ps-4" (click)="irListado()">Consultar</button> <br> <br>
+        <img class="card-img-top mt-2" src="../../../../assets/boleto.png" alt="icono recibo" id="iconoArticulos">
+    </div>
+    <div class="mt-2">     
+        <app-create-pedidos *ngIf="ventanaCrear" (finCrear)="recogerDatos($event)"></app-create-pedidos>
+        <app-get-pedidos *ngIf="mostrarListado"> </app-get-pedidos>
+    </div>
+</section>
+

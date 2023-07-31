@@ -1,0 +1,22 @@
+<span *ngFor="let usuario of usuarios | async">
+    <div *ngIf="usuario._id == usuarioSeleccionado._id">
+        <div class="d-flex justify-content-around">
+            <h6 class="card-title">{{usuario.username}}</h6>
+        </div>
+
+        <div class="card-text mb-5">
+            <form [formGroup]="form">
+                <label>Nombre usuario</label> 
+                <input type="text" formControlName="username" class="form-control form-control-sm" placeholder={{usuario.username}}> 
+                <label class="mt-1">Contraseña</label>
+                <input type="text" formControlName="password" class="form-control form-control-sm" placeholder={{usuario.password}}> 
+                <div class="d-flex justify-content-around pt-3 mt-4">
+                    <button class="btn btn-outline-success me-2" (click)="peticionModificar(form.value)"
+                    [disabled]="!form.valid"> Guardar </button>
+                    <button class="btn btn-outline-secondary" (click)="volver(true)"> Cancelar </button>
+                </div>
+            </form>
+            
+        </div>
+    </div>
+</span>

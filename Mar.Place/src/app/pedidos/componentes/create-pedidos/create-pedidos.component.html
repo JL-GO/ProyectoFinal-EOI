@@ -1,0 +1,88 @@
+<section class="mt-4 ms-2 mb-5">
+    <div class="card" id="contenido">
+        <div class="card-body">
+            <p id="usuarioPedido" class="text-center">Pedido para el usuario: <b>{{nombreUsuario}}</b> </p>
+            <form [formGroup]="form" class="d-flex">
+                <div class="me-3 ms-2 ps-2 pe-2">
+                    <div>
+                        <label>Nombre del Pedido</label> <br>
+                        <input type="text" formControlName="nombre" placeholder="Nombre"
+                            class="form-control form-control-sm">
+                    </div>
+                    <div class="mt-2">
+                        <label>Fecha</label> <br>
+                        <input type="date" formControlName="fecha" class="form-control form-control-sm" id="fecha">
+                    </div>
+                    <div class="mt-2">
+                        <label>Artículos</label> <br>
+                        <select class="form-control form-control-sm" (change)="seleccionarArticulo($event)">
+                            <option>Selecciona un artículo</option>
+                            <option *ngFor="let art of articulosDisponibles" value={{art._id}}>
+                                {{art.nombre}}
+                            </option>
+                        </select>
+                    </div>
+                    <div *ngFor="let art of articulosDisponibles; let i=index" id="detallesArticulos" class="mt-2">
+                        <div class="card" style="height: 130px;" *ngIf="idArticuloSelecionado == art._id">
+                            <div class="card-body align-items-center d-flex flex-column">
+
+                                <p class="card-subtitle text-muted">
+                                    Precio: {{art.precio}} € &nbsp; &nbsp; &nbsp;
+                                    Stock: {{art.stock}} Ud</p>
+
+                                <div class="card-text d-flex alig">
+                                    <button class="btn btn-link btnMasMenos me-0 pe-0" (click)="disminuirCantidad(art)">
+                                        <b class="signo"> - </b>
+                                    </button> 
+                                    <input id="numeroArticulos" class="form-control form-control-sm pt-4 ps-3"
+                                        type="number" disabled value={{itemsPedidos}}>
+                                    <button class="btn btn-link btnMasMenos ms-0 ps-0 " (click)="aumentarCantidad(art)">
+                                        <b class="signo"> + </b>
+                                    </button>
+                                </div>
+                                <span class="d-flex align-items-end">
+                                    <button class="d-flex align-items-end btn btn-outline-info mt-3" id="botonAnyadir"
+                                        (click)="enviaraCarrito(art)">
+                                        Añadir al pedido</button>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="card" style="height: 130px; border: none;" *ngIf="idArticuloSelecionado == 'Selecciona un artículo'  && i < 1 ">
+
+                            <div class="card-body align-items-center d-flex flex-column">
+
+                                <p class="card-subtitle text-muted">
+                                    
+                                </p>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+
+                    <div>
+                
+                        <div *ngFor="let elem of carrito | keyvalue" class="d-flex justify-content-between"
+                            id="carrito">
+                            <p class="mt-2 pb-0 mb-0" *ngIf="elem.value.seleccionados != 0">
+                                <b>{{elem.value.nombre}}</b> <i>
+                                    - (Unidades: {{elem.value.seleccionados}})
+                                    - precio: {{(elem.value.seleccionados! * elem.value.precio!).toFixed(2)}} € </i>
+                            </p>
+                            
+                            <button class="btn " *ngIf="elem.value.seleccionados != 0">
+                                <img src="../../../../assets/papelera.png" alt="eliminar del carrito" id="iconoPapelera"
+                                    (click)="eliminarDelCarrito(elem.key, elem.value.articuloCompleto)"> </button>
+                        </div>
+                    
+                </div>
+            </form>
+            <div class="text-muted pt-2 d-flex justify-content-end">
+                <b class="pt-2 me-4">Total del pedido: {{(precioCarrito).toFixed(2)}}€</b>
+                <button class="btn btn-outline-success ms-2 mb-2 pt-1 me-5 "
+                    [disabled]="!form.valid || carrito.size === 0" (click)="peticionCrear(form.value)">Crear
+                    pedido</button>
+            </div>
+
+        </div>
+    </div>
+</section>

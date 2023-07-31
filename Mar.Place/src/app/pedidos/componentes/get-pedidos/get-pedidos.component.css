@@ -1,0 +1,36 @@
+#iconoPedidos{
+    width: 100px;
+    text-align: center;
+}
+
+#cardPedidos{
+    width: 21rem; 
+    min-height: 30rem;
+
+    height: auto;
+
+}
+
+#buscadorPedidos{
+    max-width: 712px;
+}
+
+section{
+    width: 161vh;
+    overflow: hidden;
+}
+
+#listaArticulos{
+    overflow: auto;
+    min-height: 120px;
+    max-height: 120px;
+    width: 290px;
+    padding-left: 50px;
+    background-color: rgba(34, 81, 81, 0.292);
+    border-radius: 10px;
+    margin-right: 10px;
+}
+
+h6{
+    min-height: 40px;
+}

@@ -1,0 +1,11 @@
+<section class="container-fluid d-flex">
+    <div class="mt-2 p-5">
+        <button class="btn btn-light mb-2 pe-2" (click)="irCrear()">Crear usuario</button> <br>
+        <button class="btn btn-light pe-4 ps-4" (click)="irListado()">Consultar</button><br> <br>
+        <img class="card-img-top mt-2" src="../../../../assets/usuarioPortada.png" alt="icono usuarios" id="iconoArticulos">
+    </div>
+    <div class="mt-2">     
+        <app-create-usuarios *ngIf="ventanaCrear" (finCrear)="recogerDatos($event)"></app-create-usuarios>
+        <app-get-usuarios *ngIf="mostrarListado"> </app-get-usuarios>
+    </div>
+</section>

@@ -1,0 +1,24 @@
+#iconoArticulos{
+    width: 100px;
+    text-align: center;
+}
+
+#cardArticulos{
+    width: 14rem; 
+
+    min-height: 20rem;
+    max-height: 20rem;
+}
+
+#buscadorArticulos{
+    max-width: 708px;
+}
+
+section{
+    width: 161vh;
+}
+
+h6{
+   height: 20px;
+   overflow: auto;
+}

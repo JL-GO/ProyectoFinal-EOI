@@ -1,0 +1,19 @@
+<span *ngFor="let pedido of pedidos | async" class="">
+    <div *ngIf="pedido._id == idPedido">
+        <div class="d-flex justify-content-center">
+            <h6 class="card-title text-center me-2 ms-2 p-2">{{pedido.nombre}}</h6>
+        </div>
+        <span class="d-flex flex-column text-center ms-2">
+
+            <p class="card-text ms-1 mt-2"> Fecha pedido: {{pedido.fecha | date:'dd-MM-yyyy'}} <br>
+                Tipos distintos de artículos: {{(pedido.articulos!).length}} <br>
+            </p> <br>
+            <p class="mb-5 pb-2"> ¿Seguro que quieres eliminar este pedido?</p>
+            <div class="d-flex justify-content-center mt-4 pt-4">
+                <button class="btn btn-outline-danger me-3" (click)="peticionBorrar(pedido._rev!)"> Eliminar </button>
+                <button class="btn btn-outline-secondary" (click)="volver(true)"> Cancelar
+                </button>
+            </div>
+        </span>
+    </div>
+</span>
